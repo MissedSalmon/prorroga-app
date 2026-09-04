@@ -1,0 +1,135 @@
+{
+  "periodo": [
+    {
+      "id": "1-ciclo-25",
+      "nombre": "Primer Ciclo",
+      "fechaInicio": "17-3-2025",
+      "fechaVencimiento": "10-3-2026"
+    },
+    {
+      "id": "2-ciclo-25",
+      "nombre": "Segundo Ciclo",
+      "fechaInicio": "11-8-2025",
+      "fechaVencimiento": "9-8-2026"
+    },
+
+    {
+      "id": "1-ciclo-26",
+      "nombre": "Primer Ciclo",
+      "fechaInicio": "16-3-2026",
+      "fechaVencimiento": "15-3-2027"
+    },
+    {
+      "id": "2-ciclo-26",
+      "nombre": "Segundo Ciclo",
+      "fechaInicio": "10-8-2026",
+      "fechaVencimiento": "9-8-2027"
+    },
+
+    {
+      "id": "1-ciclo-27",
+      "nombre": "Primer Ciclo",
+      "fechaInicio": "16-3-2027",
+      "fechaVencimiento": "15-3-2028"
+    },
+    {
+      "id": "2-ciclo-27",
+      "nombre": "Segundo Ciclo",
+      "fechaInicio": "10-8-2027",
+      "fechaVencimiento": "9-8-2028"
+    }
+  ],
+  "materia": [
+    {
+      "id": "prog1",
+      "nombre": "Programación I",
+      "cuatrimestre": 1
+    },
+    {
+      "id": "aso",
+      "nombre": "Arquitectura y Sistemas Operativos",
+      "cuatrimestre": 1
+    },
+    {
+      "id": "mat",
+      "nombre": "Matemática",
+      "cuatrimestre": 1
+    },
+    {
+      "id": "oe",
+      "nombre": "Organización Empresarial",
+      "cuatrimestre": 1
+    },
+    {
+      "id": "prog2",
+      "nombre": "Programación II",
+      "cuatrimestre": 2
+    },
+    {
+      "id": "pye",
+      "nombre": "Probabilidad y Estadística",
+      "cuatrimestre": 2
+    },
+    {
+      "id": "bd1",
+      "nombre": "Base de Datos I",
+      "cuatrimestre": 2
+    },
+    {
+      "id": "ing1",
+      "nombre": "Inglés I",
+      "cuatrimestre": 2
+    },
+    {
+      "id": "prog3",
+      "nombre": "Programación III",
+      "cuatrimestre": 1
+    },
+    {
+      "id": "bd2",
+      "nombre": "Base de Datos II",
+      "cuatrimestre": 1
+    },
+    {
+      "id": "mds1",
+      "nombre": "Metodología de Sistemas I",
+      "cuatrimestre": 1
+    },
+    {
+      "id": "ing2",
+      "nombre": "Inglés II",
+      "cuatrimestre": 1
+    },
+    {
+      "id": "prog4",
+      "nombre": "Programación IV",
+      "cuatrimestre": 2
+    },
+    {
+      "id": "mds2",
+      "nombre": "Metodología de Sistemas II",
+      "cuatrimestre": 2
+    },
+    {
+      "id": "add",
+      "nombre": "Introducción al Análisis de Datos",
+      "cuatrimestre": 2
+    },
+    {
+      "id": "leg",
+      "nombre": "Legislación",
+      "cuatrimestre": 2
+    },
+    {
+      "id": "dsw",
+      "nombre": "Gestión de Desarrollo de Software",
+      "cuatrimestre": 2
+    },
+    {
+      "id": "tfi",
+      "nombre": "Trabajo Final Integrador",
+      "cuatrimestre": 2
+    }
+  ]
+}
+  
