@@ -135,7 +135,7 @@ function App() {
           <img src={utnLogo} className="base" width="170" height="179" alt="UTN Logo" />
         </div>
         <div>
-          <h1>Calculadora de Prórrogas</h1>
+          <h1>Calculadora de Regularidad</h1>
           <p style={{ textAlign: 'center', marginBottom: 20 }}>
             Conocé el estado de tus regularidades según la Ordenanza Nº 1622
           </p>
