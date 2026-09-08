@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import utnLogo from './assets/utn.png'
+import utnLogo from './assets/LOGO TUP.png'
 import './App.css'
 import datos from './data/calendario.json';
 
@@ -125,29 +125,39 @@ function App() {
 
     setResultados(listaResultados);
     setModalAbierto(false);
-    setModalResultadosAbierto(true); // Abre el modal con el detalle
+    setModalResultadosAbierto(true);
   };
 
   return (
-    <>
+    <div className="main-container">
       <section id="center">
-        <div className="indexlogo">
-          <img src={utnLogo} className="base" width="170" height="179" alt="UTN Logo" />
+        <div style={{ 
+          display: 'flex', 
+          flexDirection: 'row', 
+          alignItems: 'center', 
+          justifyContent: 'center', 
+          gap: '20px', 
+          flexWrap: 'wrap',
+          padding: '0 15px'
+        }}>
+          <img 
+            src={utnLogo} 
+            style={{ maxHeight: '55px', width: 'auto', objectFit: 'contain' }} 
+            alt="UTN Logo" 
+          />
+          <h1 style={{ margin: 0, textAlign: 'left' }}>
+            Calculadora de Regularidad
+          </h1>
         </div>
-        <div>
-          <h1>Calculadora de Regularidad</h1>
-          <p style={{ textAlign: 'center', marginBottom: 20 }}>
-            Conocé el estado de tus regularidades según la Ordenanza Nº 1622
-          </p>
-        </div>
+        <p style={{ textAlign: 'center', margin: '5px 0 20px', color: '#555' }}>
+          Conocé el estado de regularidad de tus materias según lo indica la Ordenanza Nº 1622
+        </p>
       </section>
 
-      <div className="ticks"></div>
-
       <section id="next-steps">
-        <p style={{ fontSize: '18px', margin: 0 }}>Elegí tus materias</p>
+        <p style={{ fontSize: '18px', margin: 0 }}>Seleccioná tus materias</p>
 
-        <div className="contenedor-interactivo" style={{ flexDirection: 'row', flexWrap: 'wrap', justifyContent: 'center' }}>
+        <div className="contenedor-interactivo">
           {MATERIAS_TUP.map((materia) => {
             const estaActiva = materiasSeleccionadas.includes(materia.id);
             return (
@@ -170,12 +180,14 @@ function App() {
             style={{
               marginTop: '20px',
               padding: '12px 24px',
-              backgroundColor: '#3b82f6',
+              backgroundColor: 'var(--utn-blue)', 
               color: '#ffffff',
               border: 'none',
               borderRadius: '6px',
               cursor: 'pointer',
-              fontWeight: 'bold'
+              fontWeight: 'bold',
+              boxShadow: '0 4px 6px rgba(0, 56, 118, 0.2)',
+              transition: 'transform 0.1s'
             }}
           >
             Configurar Cursado ({materiasSeleccionadas.length})
@@ -183,44 +195,41 @@ function App() {
         )}
       </section>
 
-      {/* ------------------ MODAL 1: FORMULARIO ------------------ */}
       {modalAbierto && (
-        <div style={estilosModal.backdrop}>
-          <div style={estilosModal.ventana}>
-            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
-              <h2 style={{ margin: 0, color: '#1e293b' }}>Años y Prórrogas</h2>
+        <div className="modal-backdrop" onClick={() => setModalAbierto(false)}>
+          <div className="modal-window" onClick={(e) => e.stopPropagation()}>
+            <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+              <h2 style={{ margin: 0, color: 'var(--utn-blue)' }}>Años y Prórrogas</h2>
               <button onClick={() => setModalAbierto(false)} style={estilosModal.btnCerrar}>✕</button>
             </div>
 
             <form onSubmit={(e) => { e.preventDefault(); procesarCalculosFinales(); }}>
-              <table style={{ width: '100%', borderCollapse: 'collapse', margin: '20px 0' }}>
-                <thead>
-                  <tr style={{ borderBottom: '2px solid #e5e7eb', textAlign: 'left' }}>
-                    <th style={{ padding: '10px' }}>Materia</th>
-                    <th style={{ padding: '10px', textAlign: 'center' }}>Año Cursado</th>
-                    <th style={{ padding: '10px', textAlign: 'center' }}>¿Prórroga Otorgada?</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {materiasParaDesplegar.map((materia) => (
-                    <tr key={materia.id} style={{ borderBottom: '1px solid #f3f4f6' }}>
-                      <td style={{ padding: '12px 10px', fontWeight: '500' }}>{materia.nombre}</td>
-                      <td style={{ padding: '12px 10px', textAlign: 'center' }}>
-                        <input 
-                          required
-                          type="number"
-                          min={2020}
-                          max={2027}
-                          placeholder="Año"
-                          value={aniosCursado[materia.id] || ''}
-                          onChange={(e) => setAniosCursado(prev => ({
-                            ...prev,
-                            [materia.id]: parseInt(e.target.value)
-                          }))}
-                          style={{ width: '65px', padding: '5px', textAlign: 'center' }}
-                        />
-                      </td>
-                      <td style={{ padding: '12px 10px', textAlign: 'center' }}>
+              <datalist id="anios-sugeridos">
+                {Array.from({ length: 5 }, (_, i) => new Date().getFullYear() - i).map(anio => (
+                  <option key={anio} value={anio} />
+                ))}
+              </datalist>
+
+              <div className="modal-list">
+                {materiasParaDesplegar.map((materia) => (
+                  <div key={materia.id} className="modal-item">
+                    <div className="modal-item-name">{materia.nombre}</div>
+                    <div className="modal-item-controls">
+                      <input 
+                        required
+                        type="number"
+                        min={2010}
+                        max={new Date().getFullYear()}
+                        placeholder="Año"
+                        list="anios-sugeridos"
+                        className="input-anio"
+                        value={aniosCursado[materia.id] || ''}
+                        onChange={(e) => setAniosCursado(prev => ({
+                          ...prev,
+                          [materia.id]: parseInt(e.target.value)
+                        }))}
+                      />
+                      <label className="checkbox-prorroga">
                         <input 
                           type="checkbox"
                           checked={!!prorrogasPedidas[materia.id]}
@@ -228,15 +237,15 @@ function App() {
                             ...prev,
                             [materia.id]: e.target.checked
                           }))}
-                          style={{ transform: 'scale(1.2)', cursor: 'pointer' }}
                         />
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
+                        ¿Prórroga?
+                      </label>
+                    </div>
+                  </div>
+                ))}
+              </div>
 
-              <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+              <div style={{ display: 'flex', justifyContent: 'flex-end', marginTop: '20px' }}>
                 <button type="submit" style={estilosModal.btnAccion}>
                   Calcular Regularidades
                 </button>
@@ -246,13 +255,12 @@ function App() {
         </div>
       )}
 
-      {/* ------------------ MODAL 2: RESULTADOS DETALLADOS ------------------ */}
       {modalResultadosAbierto && (
-        <div style={estilosModal.backdrop}>
-          <div style={{ ...estilosModal.ventana, maxWidth: '700px' }}>
+        <div className="modal-backdrop" onClick={() => setModalResultadosAbierto(false)}>
+          <div className="modal-window" style={{ maxWidth: '700px' }} onClick={(e) => e.stopPropagation()}>
             <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '15px' }}>
               <div>
-                <h2 style={{ margin: 0, color: '#1e293b' }}>Estado Académico</h2>
+                <h2 style={{ margin: 0, color: 'var(--utn-blue)' }}>Estado Académico</h2>
                 <small style={{ color: '#64748b' }}>Reglamento de Estudio Ord. Nº 1622</small>
               </div>
               <button onClick={() => setModalResultadosAbierto(false)} style={estilosModal.btnCerrar}>✕</button>
@@ -309,37 +317,11 @@ function App() {
           </div>
         </div>
       )}
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
+    </div>
   )
 }
 
-// Objeto de estilos limpios para los modales
 const estilosModal = {
-  backdrop: {
-    position: 'fixed',
-    top: 0,
-    left: 0,
-    width: '100vw',
-    height: '100vh',
-    backgroundColor: 'rgba(15, 23, 42, 0.65)',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    zIndex: 1000
-  },
-  ventana: {
-    backgroundColor: '#ffffff',
-    padding: '24px',
-    borderRadius: '12px',
-    width: '90%',
-    maxWidth: '600px',
-    boxShadow: '0 10px 25px -5px rgba(0, 0, 0, 0.2)',
-    color: '#333333',
-    position: 'relative'
-  },
   btnCerrar: {
     backgroundColor: 'transparent',
     border: 'none',
@@ -350,7 +332,7 @@ const estilosModal = {
   },
   btnAccion: {
     padding: '10px 20px',
-    backgroundColor: '#1e293b',
+    backgroundColor: 'var(--utn-blue)', 
     color: '#ffffff',
     border: 'none',
     borderRadius: '6px',
