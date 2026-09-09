@@ -1,6 +1,18 @@
 {
   "periodo": [
     {
+      "id": "1-ciclo-24",
+      "nombre": "Primer Ciclo",
+      "fechaInicio": "11-3-2024",
+      "fechaVencimiento": "16-3-2025"
+    },
+    {
+      "id": "2-ciclo-24",
+      "nombre": "Segundo Ciclo",
+      "fechaInicio": "5-8-2024",
+      "fechaVencimiento": "10-8-2025"
+    },
+    {
       "id": "1-ciclo-25",
       "nombre": "Primer Ciclo",
       "fechaInicio": "17-3-2025",
@@ -37,6 +49,18 @@
       "nombre": "Segundo Ciclo",
       "fechaInicio": "10-8-2027",
       "fechaVencimiento": "9-8-2028"
+    },
+    {
+      "id": "1-ciclo-28",
+      "nombre": "Primer Ciclo",
+      "fechaInicio": "17-3-2028",
+      "fechaVencimiento": "15-3-2029"
+    },
+    {
+      "id": "2-ciclo-28",
+      "nombre": "Segundo Ciclo",
+      "fechaInicio": "11-8-2028",
+      "fechaVencimiento": "10-8-2029"
     }
   ],
   "materia": [

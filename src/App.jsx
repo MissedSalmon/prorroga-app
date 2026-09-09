@@ -6,15 +6,17 @@ import datos from './data/calendario.json';
 const MATERIAS_TUP = datos.materia;
 
 function calcularEstadoMateria(materiaId, anioCursado, yaTieneProrroga) {
+  console.log(anioCursado)
   const materia = datos.materia.find(m => m.id === materiaId);
   if (!materia) return { estado: "Error", mensaje: "Materia no encontrada", color: "#6b7280" };
 
-  const sufijoAnio = String(anioCursado).slice(-2);
+  const sufijoAnio = String(anioCursado-1).slice(-2);
+  console.log(anioCursado)
   const idCicloBuscado = `${materia.cuatrimestre}-ciclo-${sufijoAnio}`;
 
   const periodoAcademico = datos.periodo.find(p => p.id === idCicloBuscado);
 
-  if (!periodoAcademico || !periodoAcademico.fechaVencimiento) {
+ if (!periodoAcademico || !periodoAcademico.fechaVencimiento) {
     return {
       nombreMateria: materia.nombre,
       estado: "VENCIDA",
@@ -119,7 +121,7 @@ function App() {
         return;
       }
 
-      const res = calcularEstadoMateria(id, anio, tieneProrroga);
+      const res = calcularEstadoMateria(id, anio+1, tieneProrroga);
       listaResultados.push(res);
     });
 
